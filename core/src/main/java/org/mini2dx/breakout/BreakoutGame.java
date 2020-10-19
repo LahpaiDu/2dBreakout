@@ -41,6 +41,8 @@ import org.mini2Dx.ui.style.UiTheme;
 import java.io.IOException;
 import java.util.Objects;
 
+import java.util.Random;
+
 public class BreakoutGame extends BasicGameScreen {
     public static final int ID = 2;
 
@@ -53,7 +55,8 @@ public class BreakoutGame extends BasicGameScreen {
     private static final String GAME_OVER_STRING = "GAME OVER!";
     private static final String UI_ASK_NAME_LAYOUT_XML = "ui/askname_ui.xml";
 
-    private static final Brick.Color[] brickColors = {Brick.Color.RED, Brick.Color.PURPLE, Brick.Color.BLUE, Brick.Color.GREEN, Brick.Color.YELLOW, Brick.Color.GREY};
+    private static Brick.Color brickColors[] = {Brick.Color.RED, Brick.Color.PURPLE, Brick.Color.BLUE, Brick.Color.GREEN, Brick.Color.YELLOW, Brick.Color.GREY, Brick.Color.VIR };
+
     private GameState gameState;
 
     private Viewport viewport;
@@ -123,10 +126,14 @@ public class BreakoutGame extends BasicGameScreen {
                     paddle.update(delta);
                     CollisionHandler.update();
                     ball.update(delta);
-                    for (int i = 0; i < gridSizeX; i++)
-                        for (int j = 0; j < gridSizeY; j++)
-                            bricks[i][j].update();
-
+                    for (int i = 0; i < gridSizeX; i++) {
+                        for (int j = 0; j < gridSizeY; j++) {
+                                bricks[i][j].update();
+                        }
+                    }
+//                    if (...)
+//                        score.superupdate...
+//                    else
                     score.update();
                     if (ball.getCollisionBox().getY() > gameHeight) {
                         lives.decrease();
@@ -191,11 +198,28 @@ public class BreakoutGame extends BasicGameScreen {
     }
 
     private void initialiseBricks() {
-        for (int j = 0; j < gridSizeY; j++)
-            for (int i = 0; i < gridSizeX; i++)
-                bricks[i][j] = new Brick(brickColors[j], i * Brick.width, j * Brick.height);
+        for (int j = 0; j < gridSizeY; j++) {
+            for (int i = 0; i < gridSizeX; i++) {
+//                bricks[i][j] = new Brick(brickColors[j], i * Brick.width, j * Brick.height);
+                Random rand= new Random();
+                //random position
+//                int rand_x= rand.nextInt(9);
+//                int rand_y=rand.nextInt(5);
+//                System.out.println(rand_x );
+//                System.out.println(rand_y );
 
-        CollisionHandler.getInstance().setBricks(bricks);
+//                if(i == rand_x && j == rand_y) {
+                int rando = rand.nextInt(10);
+                if(rando < 9){
+                    bricks[i][j] = new Brick(brickColors[6],i * Brick.width, j * Brick.height);
+                }
+                else{
+                    bricks[i][j] = new Brick(brickColors[j], i * Brick.width, j * Brick.height);
+                }
+
+            }
+            CollisionHandler.getInstance().setBricks(bricks);
+        }
     }
 
     @Override

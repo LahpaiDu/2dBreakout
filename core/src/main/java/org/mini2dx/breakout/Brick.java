@@ -29,7 +29,9 @@ public class Brick {
         GREY("bricks/grey.png"),
         PURPLE("bricks/purple.png"),
         RED("bricks/red.png"),
-        YELLOW("bricks/yellow.png");
+        YELLOW("bricks/yellow.png"),
+        VIR("bricks/vir.png");
+
 
         private final String color;
 
@@ -42,6 +44,8 @@ public class Brick {
             return color;
         }
     }
+
+
 
     private final CollisionBox collisionBox;
     private final Sprite boxSprite;

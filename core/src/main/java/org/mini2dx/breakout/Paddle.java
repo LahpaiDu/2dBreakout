@@ -23,7 +23,7 @@ import org.mini2Dx.core.graphics.Texture;
 
 class Paddle {
 
-    public final static float PADDLE_ACCELERATION = 350;
+    public final static float PADDLE_ACCELERATION = 500;
     public static final String PADDLE_TEXTURE_IMAGE = "misc/paddle.png";
     private final CollisionBox collisionBox;
     private final Sprite paddleSprite;

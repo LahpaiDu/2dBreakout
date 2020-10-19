@@ -27,7 +27,7 @@ import java.io.IOException;
 public class Ball {
     private final static String BALL_TEXTURE_IMAGE = "misc/ball.png";
 
-    private float acceleration = 180;
+    private float acceleration = 500;
     private final CollisionBox collisionBox;
     private final Sprite ballSprite;
     private int verticalMovementSign = -1, horizontalMovementSign = 1;
