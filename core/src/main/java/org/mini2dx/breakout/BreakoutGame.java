@@ -128,12 +128,15 @@ public class BreakoutGame extends BasicGameScreen {
                     ball.update(delta);
                     for (int i = 0; i < gridSizeX; i++) {
                         for (int j = 0; j < gridSizeY; j++) {
-                                bricks[i][j].update();
+                            bricks[i][j].update();
                         }
                     }
-//                    if (...)
-//                        score.superupdate...
-//                    else
+                    // TODO: Adding if ball touching a special brick
+//                    if (CollisionHandler.getInstance().isBallTouchingAny)
+//                        lives.increase();
+                        //if(...)
+                        //score.superupdate...
+                    //else
                     score.update();
                     if (ball.getCollisionBox().getY() > gameHeight) {
                         lives.decrease();
@@ -198,10 +201,11 @@ public class BreakoutGame extends BasicGameScreen {
     }
 
     private void initialiseBricks() {
+
         for (int j = 0; j < gridSizeY; j++) {
             for (int i = 0; i < gridSizeX; i++) {
-//                bricks[i][j] = new Brick(brickColors[j], i * Brick.width, j * Brick.height);
-                Random rand= new Random();
+                bricks[i][j] = new Brick(brickColors[j], i * Brick.width, j * Brick.height);
+//                Random rand= new Random();
                 //random position
 //                int rand_x= rand.nextInt(9);
 //                int rand_y=rand.nextInt(5);
@@ -209,17 +213,20 @@ public class BreakoutGame extends BasicGameScreen {
 //                System.out.println(rand_y );
 
 //                if(i == rand_x && j == rand_y) {
-                int rando = rand.nextInt(10);
-                if(rando < 9){
-                    bricks[i][j] = new Brick(brickColors[6],i * Brick.width, j * Brick.height);
-                }
-                else{
-                    bricks[i][j] = new Brick(brickColors[j], i * Brick.width, j * Brick.height);
-                }
+//                int rando = rand.nextInt(17);
+//                if(rando < 1){
+//                     Item item1 = new Item(brickColors[6],i * Brick.width, j * Brick.height);
+//                }
+//                else{
+//                    bricks[i][j] = new Brick(brickColors[j], i * Brick.width, j * Brick.height);
+//                }
 
             }
             CollisionHandler.getInstance().setBricks(bricks);
         }
+        bricks[1][5] = new Brick(brickColors[6], 1 * Brick.width, 5 * Brick.height, true);
+        bricks[3][5] = new Brick(brickColors[6], 3 * Brick.width, 5 * Brick.height, true);
+        bricks[5][5] = new Brick(brickColors[6], 5 * Brick.width, 5 * Brick.height, true);
     }
 
     @Override

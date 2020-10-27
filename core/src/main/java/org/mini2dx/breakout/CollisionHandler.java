@@ -19,11 +19,12 @@ import org.mini2Dx.core.collision.CollisionBox;
 import org.mini2Dx.core.geom.Rectangle;
 
 public class CollisionHandler {
-    private static final CollisionHandler current;
 
+    private static final CollisionHandler current;
     private Paddle paddle;
     private Ball ball;
     private Brick[][] bricks;
+    private Brick[][] item1;
 
     private boolean isBallTouchingPaddle = false;
     private boolean isBallTouchingAnyBrick = false;
@@ -58,8 +59,14 @@ public class CollisionHandler {
 
         for (int i = 0; i < BreakoutGame.gridSizeX; i++)
             for (int j = 0; j < BreakoutGame.gridSizeY; j++)
-                if (current.bricks[i][j].isAlive() && current.ball.getCollisionBox().intersects(current.bricks[i][j].getCollisionBox()))
+                if (current.bricks[i][j].isAlive() && current.ball.getCollisionBox().intersects(current.bricks[i][j].getCollisionBox())) {
                     current.touchedBrick = current.bricks[i][j];
+                    // TODO: Add condition checking if it is a virus or special brick
+                    if (current.touchedBrick.isSpecial)
+                        current.isBallTouchingAnyItem = true;
+                    else
+                        current.isBallTouchingAnyItem = false;
+                }
 
         current.isBallTouchingAnyBrick = current.touchedBrick != null;
 

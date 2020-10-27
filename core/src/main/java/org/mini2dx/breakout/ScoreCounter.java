@@ -34,6 +34,9 @@ public class ScoreCounter {
     public void update() {
         if (CollisionHandler.getInstance().isBallTouchingAnyBrick()) {
             score += 100 * LivesHandler.getInstance().getLives() / LivesHandler.INITIAL_LIVES_NUM;
+
+            if(CollisionHandler.getInstance().isBallTouchingAnyItem())
+                score += 1000;
             isScoreStringDirty = true;
         }
     }

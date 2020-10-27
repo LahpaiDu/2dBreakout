@@ -21,7 +21,7 @@ import org.mini2Dx.core.collision.CollisionBox;
 import org.mini2Dx.core.graphics.Sprite;
 import org.mini2Dx.core.graphics.Texture;
 
-public class Brick {
+public class Brick{
 
     public enum Color {
         BLUE("bricks/blue.png"),
@@ -31,7 +31,6 @@ public class Brick {
         RED("bricks/red.png"),
         YELLOW("bricks/yellow.png"),
         VIR("bricks/vir.png");
-
 
         private final String color;
 
@@ -45,7 +44,9 @@ public class Brick {
         }
     }
 
-
+    // TODO: Add some boolean here?
+    public boolean isVirus = false;
+    public boolean isSpecial = false;
 
     private final CollisionBox collisionBox;
     private final Sprite boxSprite;
@@ -60,6 +61,11 @@ public class Brick {
         collisionBox.setWidth(boxSprite.getWidth());
         collisionBox.setX(xPosition);
         collisionBox.setY(yPosition);
+    }
+
+    Brick(Color color, float x, float y, boolean s){
+        this(color, x, y);
+        this.isSpecial = s;
     }
 
     void update() {
@@ -87,7 +93,6 @@ public class Brick {
     public void setAlive(boolean alive) {
         isAlive = alive;
     }
-
     public CollisionBox getCollisionBox() {
         return collisionBox;
     }
